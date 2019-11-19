@@ -1,0 +1,23 @@
+name: ${project.name}
+description: ${project.description}
+version: ${project.version}
+
+author: arboriginal
+dev-url: https://github.com/arboriginal/${project.artifactId}
+
+main: ${project.groupId}.${project.artifactId}.${spigot-main}
+api-version: ${spigot-api}
+
+commands:
+  ls-reload:
+    description: Reload the plugin configuration
+    permission: ls.reload
+
+permissions:
+  ls.reload:
+    description: Allows to use the /ls-reload command
+    default: op
+
+  ls.use:
+    description: Allows to use sponges to remove lava
+    default: false

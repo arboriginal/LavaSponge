@@ -1,0 +1,65 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# ${project.artifactId}, version ${project.version} -  Configuration file.
+# .
+# You will find an explanation of all parameters here:
+# https://github.com/arboriginal/${project.artifactId}/blob/master/src/main/resources/config.yml
+# .
+# Don't forget to setup permissions, you can read their name and description here:
+# https://github.com/arboriginal/${project.artifactId}/blob/master/src/main/resources/plugin.yml
+# .
+# Values you can use in material lists: (but also use your brain: non-blocks materials can't be used)
+# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# .
+# /!\ All values can't be used as alternative scaffoldings:
+# For example DIAMOND, ELYTRA, IRON_PICKAXE, ... won't work because those aren't blocks!
+# ----------------------------------------------------------------------------------------------------------------------
+
+wetOnly: true # true / false
+# If true, only wet sponges will remove lava (normal sponges are still usable for water obviously) 
+
+# Allows the placement of a sponge in lava / water more easily than vanilla sponge in water:
+# if true, you are not obliged to place the sponge on the side of a solid block, you can simply point to lava / water.
+easierPlacement:
+  lava: true  # true / false
+  water: true # true / false (only dry sponge are concerned)
+
+# This section prevent players to place sponge more easily (see previous section) while inside lava / water.
+# if false, this could reduce difficulty because it can save the player fallen in lava / missing on air under water.
+# so, this is a game mechanic of your choice, IMHO, it can be false for both because sponges are not so common blocks,
+# and in lava, player have short time to react + will stay in fire / in water fully respiration points comes back slowly
+# in brief: Your choice, try it, choose what you prefer for your players, but you have the option for.
+# /!\ Note: Sponges can always be placed from an immerged block's sides or bottom of the ocean / lava lake, ...  
+notSoEasierPlacement:
+  lava: false # true / false, requires easierPlacement.lava  = true
+  water: true # true / false, requires easierPlacement.water = true
+
+# List of worlds in which a placed sponge (which haven't absorbed lava) will be turned into a dry sponge.
+# (FYI, this is the default vanilla behavior in 1.15 for nether, so you should get used to.)
+# /!\ If the sponge absorbs lava, this is not triggered (but you can set SPONGE in « resultSponge » values).
+dryOutWorlds: # use « [] » if you want to disable in all worlds
+- world_nether
+
+# This section contains settings for resulted blocks after the sponge has asborded lava...
+# Each parts are formed in the same way: Couples of « Material: Integer ».
+# (You will find a link to Spigot developper doc showing all available Material values in the header of this file)
+# .
+# Integers are not percentages but "weights". To understand how it will be used, consider it like a tombola:
+# Values are amount of papers in the ballot box in favor of the corresponding material, #VOTE-FOR-PEDRO
+# the plugin will get randomly one paper and the related material wins the price.
+# .
+# You'll probably notice I've chosen default values which results in a total of 100, but this is not an obligation!
+# You can add several choices or keep only one. For example, to destroy sponge / lava, you can set only « AIR: 1 »
+result:
+  # Blocks in which the sponge will be converted
+  sponge:
+    DEAD_BRAIN_CORAL_BLOCK: 5 # (means you have 5% chance loosing the sponge and get a dead coral block)
+    SPONGE: 95
+
+  # List of blocks in which lava SOURCEs will be converted.
+  source:
+    AIR: 90
+    MAGMA_BLOCK: 10
+
+  # List of blocks in which FLOWING lava will be converted.
+  flowing:
+    AIR: 1

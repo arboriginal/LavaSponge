@@ -85,7 +85,7 @@ public class Plugin extends JavaPlugin implements Listener {
         if (!e.getPlayer().hasPermission("ls.use")) return;
 
         Block   block = e.getBlock();
-        boolean isWet = (block.getType() == Material.WET_SPONGE);
+        boolean isWet = (e.getItemInHand().getType() == Material.WET_SPONGE);
         if (!isWet && (wetOnly || block.getType() != Material.SPONGE)) return;
 
         boolean lava = false; // @formatter:off
